@@ -10,10 +10,10 @@ const static char senhaFrentista[] = "frentista";
 
 
 typedef struct {
-   int id;
-   float preco;
-   char nome[50];
-   char validade[20];
+    int id;
+    float preco;
+    char nome[50];
+    char validade[20];
 } Produto;
 
 int login() {
@@ -36,13 +36,13 @@ int login() {
     printf("Digite a senha: ");
     scanf("%s", &senha);
 
-    if (strcmp(senha, senhaCaixa) == 0&& ent == 2) {
+    if (strcmp(senha, senhaCaixa) == 0 && ent == 2) {
         printf("Login feito com sucesso!!");
         return ent;
-    } else if (strcmp(senha, senhaGerente) == 0&& ent == 1) {
+    } else if (strcmp(senha, senhaGerente) == 0 && ent == 1) {
         printf("Login feito com sucesso!!");
         return ent;
-    } else if (strcmp(senha, senhaFrentista) == 0&& ent == 3) {
+    } else if (strcmp(senha, senhaFrentista) == 0 && ent == 3) {
         printf("Login feito com sucesso!!");
         return ent;
     } else {
@@ -50,29 +50,62 @@ int login() {
     }
     return 0;
 }
-void deleteById(int ent);
 
-void updateQuantidadeProdutoEstoque(int ent);
+void deleteById(int ent){
+    if(ent==3){
 
-void generateRelatorioVenda(int ent);
-
-void generateRelatorioEstoque(int ent);
-
-float insertCombustivel(int ent);
-
-float insertProdutoEstoque(int ent);
-
-float generateRelatorioCaixa(int ent);
-
-float insertQuantidadeProdutoEstoque(int ent){
-    if(ent !=2){
-        return 0;
     }
 }
 
-float updatePrecoProduto(int ent){
+void updateQuantidadeProdutoEstoque(int ent){
+    if(ent == 2 || ent == 3){
+
+    }
+}
+
+void generateRelatorioVenda(int ent){
+    if(ent == 3){
+
+    }
+}
+
+void generateRelatorioEstoque(int ent){
+    if(ent == 3){
+
+    }
+}
+
+
+float insertCombustivel(int ent){
+    if(ent == 3){
+
+    }
+}
+
+float insertProdutoEstoque(int ent){
+    if(ent == 3){
+
+    }
+}
+
+float generateRelatorioCaixa(int ent){
+    if(ent ==3){
+        
+    }
+}
+
+float insertQuantidadeProdutoEstoque(int ent) {
+    if (ent == 2 || ent == 3) {
+
+    }
+}
+
+float updatePrecoProduto(int ent) {
+if(ent ==3){
 
 }
+}
+
 int main() {
     setlocale(LC_ALL, "Portuguese");
 
