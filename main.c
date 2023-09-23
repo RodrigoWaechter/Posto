@@ -29,7 +29,7 @@ int login() {
     printf("\n");
     printf("______________________________\n");
     printf("|============================| ");
-    printf("\n|-Bem-vindo ao Posto Esquin„o|\n");
+    printf("\n|-Bem-vindo ao Posto Esquin√£o|\n");
     printf("|============================|\n");
     printf("|1. Entrar como Gerente      |\n");
     printf("|2. Entrar como Caixa        |\n");
@@ -56,42 +56,36 @@ void insertInicio(Produto produto[], int *IL, int *FL) {
     for (int i = *FL; i >= *IL; i--) {
         produto[i + 1] = produto[i];
     }
-    printf("\nDigite o id, o nome, o preÁo e a validade do produto: ");
+    printf("\nDigite o id, o nome, o pre√ßo e a validade do produto: ");
     scanf("%d%s%f%s", &produto[*IL].id, &produto[*IL].nome, &produto[*IL].preco, &produto[*IL].validade);
     (*FL)++;
 }
 
 void insertMeio(Produto produto[], int *IL, int *FL, int k) {
 
-<<<<<<< HEAD
-
     if (k < IA || k > *FL) {
-        printf("\nPosiÁ„o inv·lida. A posiÁ„o deve estar entre %d e %d\n", IA, *FL);
+        printf("\nPosi√ß√£o inv√°lida. A posi√ß√£o deve estar entre %d e %d\n", IA, *FL);
         return;
     }
     k--;
-=======
+
     if (k < IA || k > *FL + 1) {
-        printf("\nPosiÁ„o inv·lida. A posiÁ„o deve estar entre %d e %d\n", IA, *FL + 1);
+        printf("\nPosi√ß√£o inv√°lida. A posi√ß√£o deve estar entre %d e %d\n", IA, *FL + 1);
         return;
     }
->>>>>>> d66e0c4af9f70216b199424c4e44ea142ff6e498
+
     for (int i = *FL; i >= k; i--) {
         produto[i + 1] = produto[i];
     }
-    printf("\nDigite o id, o nome, o preÁo e a validade do produto: ");
-<<<<<<< HEAD
+    printf("\nDigite o id, o nome, o pre√ßo e a validade do produto: ");
     scanf("%d%s%f%s", &produto[k].id, &produto[k].nome, &produto[k].preco, &produto[k].validade);
-=======
-    scanf("%d%s%f%s", &produto[k - 1].id, &produto[k - 1].nome, &produto[k - 1].preco, &produto[k - 1].validade);
->>>>>>> d66e0c4af9f70216b199424c4e44ea142ff6e498
     (*FL)++;
 
 }
 
 void insertFim(Produto produto[], int *IL, int *FL) {
     int posicao = *FL;
-    printf("\nDigite o id, o nome, o preÁo e a validade do produto: ");
+    printf("\nDigite o id, o nome, o pre√ßo e a validade do produto: ");
     scanf("%d%s%f%s", &produto[posicao].id, &produto[posicao].nome, &produto[posicao].preco,
           &produto[posicao].validade);
     (*FL)++;
@@ -100,7 +94,7 @@ void insertFim(Produto produto[], int *IL, int *FL) {
 void insertProdutoEstoque(int ent, Produto produto[], int *IL, int *FL, int posicao) {
     int k;
     if (*FL == MAX) {
-        printf("\nImpossÌvel realizar a aÁ„o: Lista cheia\n");
+        printf("\nImposs√≠vel realizar a a√ß√£o: Lista cheia\n");
         return;
     }
 
@@ -111,32 +105,19 @@ void insertProdutoEstoque(int ent, Produto produto[], int *IL, int *FL, int posi
         }
         if (posicao == 1) {
             insertInicio(produto, IL, FL);
-<<<<<<< HEAD
 
         } else if (posicao == 2) {
-            printf("\nDigite a posiÁ„o onde deseja inserir o produto: ");
+            printf("\nDigite a posi√ß√£o onde deseja inserir o produto: ");
             scanf("%d", &k);
             insertMeio(produto, IL, FL, k);
-
-=======
-        } else if (posicao == 2) {
-            if (k < IA || k > *FL) {
-                printf("\nPosiÁ„o inv·lida. A posiÁ„o deve estar entre %d e %d\n", IA, *FL);
-                return;
-            }
-            printf("\nDigite a posiÁ„o onde deseja inserir o produto: ");
-            scanf("%d", &k);
-            insertMeio(produto, IL, FL, k);
->>>>>>> d66e0c4af9f70216b199424c4e44ea142ff6e498
         } else if (posicao == 3) {
             insertFim(produto, IL, FL);
         } else {
-            printf("\nPosiÁ„o desejada inv·lida.\n");
+            printf("\nPosi√ß√£o desejada inv√°lida.\n");
         }
     }
 }
 
-<<<<<<< HEAD
 void ordenarPorID(Produto produto[], int FL) {
     //IMPLEMENTAR BUBBLESORT
     Produto aux;
@@ -156,15 +137,13 @@ void generateRelatorioEstoque(int ent, Produto produto[], int *IL, int *FL) {
     if (ent == 3) {
         printf("\nLista Completa: ");
         for (int i = *IL; i <= *FL - 1; i++) {
-            printf("\nProduto - %d. Id: %d --- Nome: %s --- PreÁo: %.2f --- Validade: %s\n",
+            printf("\nProduto - %d. Id: %d --- Nome: %s --- Pre√ßo: %.2f --- Validade: %s\n",
                    i + 1, produto[i].id, produto[i].nome, produto[i].preco, produto[i].validade);
         }
     }
     return;
 }
 
-=======
->>>>>>> d66e0c4af9f70216b199424c4e44ea142ff6e498
 void deleteById(int ent) {
     //IMPLEMENTAR DELETAR PELO CODIGO(ID) DO PRODUTO
     if (ent == 3) {
@@ -191,38 +170,15 @@ void generateRelatorioVenda(int ent) {
     return;
 }
 
-<<<<<<< HEAD
 float insertCombustivel(int ent) {
-    //IMPLEMENTAR AUMENTAR A QUANTIDADE DE COMBUST?VEL DO TANQUE
-=======
-void generateRelatorioEstoque(int ent, Produto produto[], int *IL, int *FL) {
-    if (ent == 3) {
-        printf("\nLista Completa: ");
-        for (int i = *IL; i <= *FL - 1; i++) {
-            printf("\n======== Produto-%d =======\n\tId: %d\n\tNome: %s\n\tPreco: %.2f\n\tValidade: ""%s\n==========================",
-                   i + 1, produto[i].id, produto[i].nome, produto[i].preco, produto[i].validade);
-        }
-    }
-    return;
-}
+    //IMPLEMENTAR AUMENTAR A QUANTIDADE DE COMBUST√çVEL DO TANQUE
 
-void ordenarPorID() {
-    //IMPLEMENTAR BUBBLESORT
-}
-
-float insertCombustivel(int ent) {
-    //IMPLEMENTAR AUMENTAR A QUANTIDADE DE COMBUSTÕVEL DO TANQUE
->>>>>>> d66e0c4af9f70216b199424c4e44ea142ff6e498
     if (ent == 3) {
 
     }
     return -1;
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> d66e0c4af9f70216b199424c4e44ea142ff6e498
 float generateRelatorioCaixa(int ent) {
     if (ent == 3) {
 
@@ -239,21 +195,14 @@ float insertQuantidadeProdutoEstoque(int ent) {
 }
 
 float updatePrecoProduto(int ent) {
-<<<<<<< HEAD
     //IMPLEMENTAR ATUALIZAR  O PRE?O DE UM PRODUTO SELECIONADO PELO ID DELE
-=======
-    //IMPLEMENTAR ATUALIZAR  O PRE«O DE UM PRODUTO SELECIONADO PELO ID DELE
->>>>>>> d66e0c4af9f70216b199424c4e44ea142ff6e498
+
     if (ent == 3) {
 
     }
     return -1;
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> d66e0c4af9f70216b199424c4e44ea142ff6e498
 int main() {
     setlocale(LC_ALL, "Portuguese");
 
@@ -270,25 +219,19 @@ int main() {
         printf("\n---------------------------------------");
         printf("\nInforme onde deseja inserir o produto:");
         printf("\n\t0. Sair");
-        printf("\n\t1. InÌcio da lista\t");
+        printf("\n\t1. In√≠cio da lista\t");
         printf("\n\t2. Meio da lista\t");
         printf("\n\t3. Final da lista\t");
         printf("\n---------------------------------------");
-        printf("\nPosiÁ„o escolhida: ");
+        printf("\nPosi√ß√£o escolhida: ");
         scanf("%d", &posicao);
         if (posicao != 0) {
             insertProdutoEstoque(ent, produto, &IL, &FL, posicao);
-<<<<<<< HEAD
 
         }
     } while (posicao != 0);
     ordenarPorID(produto, FL);
     generateRelatorioEstoque(ent, produto, &IL, &FL);
-=======
-        }
-    } while (posicao != 0);
-    generateRelatorioEstoque(ent,produto, &IL, &FL);
->>>>>>> d66e0c4af9f70216b199424c4e44ea142ff6e498
 
-    return 0;
+return 0;
 }
