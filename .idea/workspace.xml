@@ -35,12 +35,19 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+<<<<<<< HEAD
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
     &quot;state&quot;: &quot;OPEN&quot;,
     &quot;assignee&quot;: &quot;RodrigoWaechter&quot;
   }
 }</component>
+=======
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+  }
+}]]></component>
+>>>>>>> d66e0c4af9f70216b199424c4e44ea142ff6e498
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
@@ -81,13 +88,22 @@
     "WebServerToolWindowFactoryState": "false",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
+<<<<<<< HEAD
     "git-widget-placeholder": "main",
     "last_opened_file_path": "C:/linguagemC/Projeto01/Posto",
+=======
+    "git-widget-placeholder": "criandoFunções",
+    "last_opened_file_path": "C:/linguagemC/ListasSequenciais/Ex00listasSequenciais",
+>>>>>>> d66e0c4af9f70216b199424c4e44ea142ff6e498
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+<<<<<<< HEAD
     "nodejs_package_manager_path": "npm",
+=======
+    "structure.view.defaults.are.configured": "true",
+>>>>>>> d66e0c4af9f70216b199424c4e44ea142ff6e498
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -109,8 +125,12 @@
       <updated>1695412085692</updated>
       <workItem from="1695412087097" duration="1050000" />
       <workItem from="1695413162048" duration="2286000" />
+<<<<<<< HEAD
       <workItem from="1695489141849" duration="298000" />
       <workItem from="1695489929726" duration="2432000" />
+=======
+      <workItem from="1695415488878" duration="9121000" />
+>>>>>>> d66e0c4af9f70216b199424c4e44ea142ff6e498
     </task>
     <servers />
   </component>
