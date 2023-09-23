@@ -34,14 +34,16 @@
 
 ### Exemplo de Execução:
   Inicie o programa e escolha a função (Frentista, Caixa ou Gerente).
-Realize as operações disponíveis conforme a função selecionada.
+  
+  Realize as operações disponíveis conforme a função selecionada.
+  
   No final do dia, o Caixa ou o Gerente pode gerar um relatório com a receita total arrecadada.
-Observações
-  O programa foi desenvolvido com o objetivo de facilitar a gestão do posto de combustível, melhorando o controle de estoque, vendas e receitas.
-  Todas as ações realizadas no sistema são registradas para fins de auditoria e controle.
-  O sistema é fictício e foi criado apenas como um exemplo de gerenciamento de estoque.
+#### Observações:
+  - O programa foi desenvolvido com o objetivo de facilitar a gestão do posto de combustível, melhorando o controle de estoque, vendas e receitas.
+  - Todas as ações realizadas no sistema são registradas para fins de auditoria e controle.
+  - O sistema é fictício e foi criado apenas como um exemplo de gerenciamento de estoque.
 
-# Tecnologias Utilizadas
+# Tecnologias/Ferramentas Utilizadas
 ### O sistema será desenvolvido utilizando as seguintes tecnologias:
 - Linguagem de Programação: C/C++
 - [Trello](https://trello.com/b/zuyIEfQr/o-esquin%C3%A3o-organiza%C3%A7%C3%A3o): Usado para gerenciar tarefas e organização do projeto.
