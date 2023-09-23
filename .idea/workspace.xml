@@ -21,6 +21,7 @@
     <list default="true" id="9ecfea11-2cad-4c57-a520-d3a9c5dac45d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.exe" beforeDir="false" afterPath="$PROJECT_DIR$/main.exe" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +79,7 @@
     "WebServerToolWindowFactoryState": "false",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "criandoFunções",
     "last_opened_file_path": "C:/linguagemC/ListasSequenciais/Ex00listasSequenciais",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -106,7 +107,7 @@
       <updated>1695412085692</updated>
       <workItem from="1695412087097" duration="1050000" />
       <workItem from="1695413162048" duration="2286000" />
-      <workItem from="1695415488878" duration="2105000" />
+      <workItem from="1695415488878" duration="9121000" />
     </task>
     <servers />
   </component>
