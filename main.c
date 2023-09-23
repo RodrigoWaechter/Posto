@@ -62,18 +62,26 @@ void insertInicio(Produto produto[], int *IL, int *FL) {
 }
 
 void insertMeio(Produto produto[], int *IL, int *FL, int k) {
-
-
     if (k < IA || k > *FL) {
         printf("\nPosição inválida. A posição deve estar entre %d e %d\n", IA, *FL);
         return;
     }
     k--;
+
+    if (k < IA || k > *FL + 1) {
+        printf("\nPosição inválida. A posição deve estar entre %d e %d\n", IA, *FL + 1);
+        return;
+    }
+
     for (int i = *FL; i >= k; i--) {
         produto[i + 1] = produto[i];
     }
     printf("\nDigite o id, o nome, o preço e a validade do produto: ");
+
     scanf("%d%s%f%s", &produto[k].id, &produto[k].nome, &produto[k].preco, &produto[k].validade);
+
+    scanf("%d%s%f%s", &produto[k - 1].id, &produto[k - 1].nome, &produto[k - 1].preco, &produto[k - 1].validade);
+
     (*FL)++;
 
 }
@@ -101,7 +109,18 @@ void insertProdutoEstoque(int ent, Produto produto[], int *IL, int *FL, int posi
         if (posicao == 1) {
             insertInicio(produto, IL, FL);
 
+
         } else if (posicao == 2) {
+            printf("\nDigite a posição onde deseja inserir o produto: ");
+            scanf("%d", &k);
+            insertMeio(produto, IL, FL, k);
+
+
+        } else if (posicao == 2) {
+            if (k < IA || k > *FL) {
+                printf("\nPosição inválida. A posição deve estar entre %d e %d\n", IA, *FL);
+                return;
+            }
             printf("\nDigite a posição onde deseja inserir o produto: ");
             scanf("%d", &k);
             insertMeio(produto, IL, FL, k);
@@ -166,8 +185,14 @@ void generateRelatorioVenda(int ent) {
     return;
 }
 
+
 float insertCombustivel(int ent) {
     //IMPLEMENTAR AUMENTAR A QUANTIDADE DE COMBUST?VEL DO TANQUE
+}
+
+
+float insertCombustivel(int ent) {
+    //IMPLEMENTAR AUMENTAR A QUANTIDADE DE COMBUSTÍVEL DO TANQUE
     if (ent == 3) {
 
     }
@@ -191,6 +216,7 @@ float insertQuantidadeProdutoEstoque(int ent) {
 
 float updatePrecoProduto(int ent) {
     //IMPLEMENTAR ATUALIZAR  O PRE?O DE UM PRODUTO SELECIONADO PELO ID DELE
+    //IMPLEMENTAR ATUALIZAR  O PREÇO DE UM PRODUTO SELECIONADO PELO ID DELE
     if (ent == 3) {
 
     }
@@ -225,7 +251,10 @@ int main() {
         }
     } while (posicao != 0);
     ordenarPorID(produto, FL);
-    generateRelatorioEstoque(ent, produto, &IL, &FL);
+}
 
-    return 0;
+} while (posicao != 0);
+generateRelatorioEstoque(ent, produto,&IL, &FL);
+
+return 0;
 }
