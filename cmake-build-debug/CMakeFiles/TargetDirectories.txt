@@ -1,0 +1,3 @@
+C:/linguagemC/Projeto01/Posto/cmake-build-debug/CMakeFiles/Posto.dir
+C:/linguagemC/Projeto01/Posto/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/linguagemC/Projeto01/Posto/cmake-build-debug/CMakeFiles/rebuild_cache.dir
