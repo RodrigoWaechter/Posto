@@ -19,7 +19,7 @@ typedef struct {
     int id;
     float preco;
     char nome[50];
-    char validade[20];
+    char validade;
     int qntd;
 
 } Produto;
@@ -33,7 +33,9 @@ typedef struct {
     float limiteRadiador;
     float calibrePneu;
     bool vidroSujo;
-
+    char modelo;
+    char cor;
+    char ano;
 } Carro;
 
 typedef struct {
@@ -41,6 +43,7 @@ typedef struct {
     int qntd;
     float precoU;
     float precoT;
+
 
 } Historico;
 
@@ -429,30 +432,153 @@ float updatePrecoProduto(int ent, Produto produto[], int *IL, int *FL) {
 
 // INTERAÇÃO COM VEÍCULO
 
-float encherTanque(int ent) {
-    //IMPLEMENTAR AUMENTAR A QUANTIDADE DE COMBUSTÍVEL DO TANQUE
-
-    if (ent == 3) {
-
-    } else {
-        printf("Você não possui as permissões nescessárias para realizar essa ação.");
-        return -1;
+double sortearCombustivel()
+{
+    double combustivel = (double)rand() / RAND_MAX * 56.0;
+    return combustivel;
+}
+double sortearCalibragem(){
+    double calibragem = (double)rand() / RAND_MAX * 36.0;
+    return calibragem;
+}
+bool sortearVidro()
+{
+    int vidro = rand() % 2;
+    if(vidro == 0)
+    {
+        return false;
     }
-    return -1;
+    else if (vidro == 1)
+    {
+        return true;
+    }
+}
+char sortearModelo()
+{
+    int carro = rand() % 10;
+    switch(carro)
+    {
+        case 1:
+            return 'Monza';
+            break;
+        case 2:
+            return 'Astra';
+            break;
+        case 3:
+            return 'Hilux';
+            break;
+        case 4:
+            return 'Uno';
+            break;
+        case 5:
+            return 'Gol';
+            break;
+        case 6:
+            return 'Mobi';
+            break;
+        case 7:
+            return 'Up';
+            break;
+        case 8:
+            return 'Palio';
+            break;
+        case 9:
+            return 'Argo';
+            break;
+        case 10:
+            return 'Onyx';
+            break;
+    }
+}
+char sortearCor()
+{
+    int cor = rand() % 5;
+    switch(cor)
+    {
+        case 1:
+            return 'Preto';
+            break;
+        case 2:
+            return 'Prata';
+            break;
+        case 3:
+            return 'Branco';
+            break;
+        case 4:
+            return 'Vermelho';
+            break;
+        case 5:
+            return 'Azul';
+            break;
+    }
+}
+char sortearAno()
+{
+    int ano = rand() % 24 + 2000;
+    return ano;
+}
+int novoCliente()
+{
+    int cliente = rand() % 10;
+    return cliente;
 }
 
-float encherRadiador(int ent) {
-}
+// int i = novoCliente();
+// printf("\nUM NOVO CLIENTE CHEGOU!\n[Modelo: %s]--[Cor: %s]--[Motor: %f]--[Ano: %d]--[Tanque: %.2f l]--[Pneus: %.2f lbs]--[Vidros: ]");
 
-float encherMotor(int ent) {
-}
+void encherTanque(int ent, Carro carros[], int indice)
+{
+    float combustivel;
+    if (carros[indice].litrosTanque != carros[indice].limiteTanque)
+    {
+        printf("\n[Capacidade do Tanque: %f]--[Litros atuais: %.2f]\nInforme quantos litros de combustível deseja adicionar ao tanque: "
+                , carros[indice].limiteTanque, carros[indice].litrosTanque);
+        scanf("%f", &combustivel);
 
-float calibrarPneu(int ent) {
+        carros[indice].litrosTanque = carros[indice].litrosTanque + combustivel;
+    }
+    else
+    {
+        printf("O Tanque está cheio!");
+    }
 }
+void calibrarPneu(int ent, Carro carros[], int indice)
+{
+    float libras;
+    printf("\n[Parâmetros:[0 a 20: Murcho]--[26 a 35: Ideal]\n[Libras atuais: %.2f]\nInforme quantas libras deseja adicionar à calibragem do pneu: "
+            , carros[indice].calibrePneu);
+    scanf("%f", &libras);
 
-bool limparVidro(int ent) {
+    carros[indice].calibrePneu = carros[indice].calibrePneu + libras;
+
 }
+void limparVidro(int ent, Carro carros[], int indice)
+{
+    if(carros[indice].vidroSujo == true)
+    {
+        carros[indice].vidroSujo = false;
+    }
+    else
+    {
+        printf("O Vidro já está limpo!");
+    }
 
+}
+void preencherClientes(Carro carros[])
+{
+    for(int x = 0; x<=9; x++)
+    {
+        carros[x].modelo = sortearModelo();
+        carros[x].cor = sortearCor();
+        carros[x].ano = sortearAno();
+        carros[x].litrosTanque = sortearCombustivel();
+        carros[x].limiteTanque = 72;
+        carros[x].calibrePneu = sortearCalibragem();
+        carros[x].vidroSujo = sortearVidro();
+
+        x++;
+    }
+}
 
 int main() {
     setlocale(LC_ALL, "Portuguese");
