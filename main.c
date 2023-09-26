@@ -28,15 +28,11 @@ typedef struct
 {
     float litrosTanque;
     float limiteTanque;
-    float litrosOleo;
-    float limiteOleo;
-    float litrosRadiador;
-    float limiteRadiador;
     float calibrePneu;
     bool vidroSujo;
-    char modelo;
-    char cor;
-    char ano;
+    char modelo[15];
+    char cor[15];
+    int ano;
 } Carro;
 
 typedef struct
@@ -71,8 +67,8 @@ int login()
     if (ent == 1 || ent == 2 || ent == 3)
     {
         if ((ent == 1 && strcmp(senha, senhaGerente) == 0) ||
-                (ent == 2 && strcmp(senha, senhaCaixa) == 0) ||
-                (ent == 3 && strcmp(senha, senhaFrentista) == 0))
+            (ent == 2 && strcmp(senha, senhaCaixa) == 0) ||
+            (ent == 3 && strcmp(senha, senhaFrentista) == 0))
         {
             printf("\nLogin feito com sucesso!!");
             return ent;
@@ -181,15 +177,15 @@ float generateRelatorioVendas(int ent, Historico vendas[], int *IH, int *FH)
 void inicializarProdutosPreDefinidos(Produto produto[], int FL, int totalProdutosPreDefinidos)
 {
     Produto produtosPreDefinidos[] =
-    {
-        {1, 10.0, "Banana",  "31/12/2023", 750},
-        {2, 15.0, "Uva",     "10/08/2023", 500},
-        {3, 20.0, "Bolacha", "13/11/2023", 300},
-        {4, 50.0, "Kiwi",    "06/09/2023", 300},
-        {5, 5.0,  "Carne",   "27/12/2024", 600},
-        {6, 30.0, "Suco",    "16/03/2024", 200},
-        {7, 25.0, "Bolacha", "02/03/2024", 300}
-    };
+            {
+                    {1, 10.0, "Banana",  "31/12/2023", 750},
+                    {2, 15.0, "Uva",     "10/08/2023", 500},
+                    {3, 20.0, "Bolacha", "13/11/2023", 300},
+                    {4, 50.0, "Kiwi",    "06/09/2023", 300},
+                    {5, 5.0,  "Carne",   "27/12/2024", 600},
+                    {6, 30.0, "Suco",    "16/03/2024", 200},
+                    {7, 25.0, "Bolacha", "02/03/2024", 300}
+            };
     for (int i = 0; i < totalProdutosPreDefinidos; i++)
     {
         produto[i] = produtosPreDefinidos[i];
@@ -596,68 +592,68 @@ bool sortearVidro()
     }
 }
 
-char sortearModelo()
+char* sortearModelo()
 {
-    int carro = rand() % 10;
+    int carro = rand() % 10 + 1;
     switch (carro)
     {
-    case 1:
-        return 'Monza';
-        break;
-    case 2:
-        return 'Astra';
-        break;
-    case 3:
-        return 'Hilux';
-        break;
-    case 4:
-        return 'Uno';
-        break;
-    case 5:
-        return 'Gol';
-        break;
-    case 6:
-        return 'Mobi';
-        break;
-    case 7:
-        return 'Up';
-        break;
-    case 8:
-        return 'Palio';
-        break;
-    case 9:
-        return 'Argo';
-        break;
-    case 10:
-        return 'Onyx';
-        break;
+        case 1:
+            return "Monza";
+            break;
+        case 2:
+            return "Astra";
+            break;
+        case 3:
+            return "Hilux";
+            break;
+        case 4:
+            return "Uno";
+            break;
+        case 5:
+            return "Gol";
+            break;
+        case 6:
+            return "Mobi";
+            break;
+        case 7:
+            return "Up";
+            break;
+        case 8:
+            return "Palio";
+            break;
+        case 9:
+            return "Argo";
+            break;
+        case 10:
+            return "Onyx";
+            break;
     }
 }
 
-char sortearCor()
+char* sortearCor()
 {
-    int cor = rand() % 5;
+    int cor = rand() % 5 + 1;
     switch (cor)
     {
-    case 1:
-        return 'Preto';
-        break;
-    case 2:
-        return 'Prata';
-        break;
-    case 3:
-        return 'Branco';
-        break;
-    case 4:
-        return 'Vermelho';
-        break;
-    case 5:
-        return 'Azul';
-        break;
+        case 1:
+            return "Preto";
+            break;
+        case 2:
+            return "Prata";
+            break;
+        case 3:
+            return "Branco";
+            break;
+        case 4:
+            return "Vermelho";
+            break;
+        case 5:
+            return "Azul";
+            break;
     }
 }
 
-char sortearAno()
+int sortearAno()
 {
     int ano = rand() % 24 + 2000;
     return ano;
@@ -669,9 +665,6 @@ int novoCliente()
     return cliente;
 }
 
-// int i = novoCliente();
-// printf("\nUM NOVO CLIENTE CHEGOU!\n[Modelo: %s]--[Cor: %s]--[Motor: %f]--[Ano: %d]--[Tanque: %.2f l]--[Pneus: %.2f lbs]--[Vidros: ]");
-
 void encherTanque(int ent, Carro carros[], int indice)
 {
 
@@ -682,7 +675,16 @@ void encherTanque(int ent, Carro carros[], int indice)
                carros[indice].limiteTanque, carros[indice].litrosTanque);
         scanf("%f", &combustivel);
 
-        carros[indice].litrosTanque = carros[indice].litrosTanque + combustivel;
+
+        if(carros[indice].litrosTanque + combustivel < carros[indice].limiteTanque)
+        {
+            carros[indice].litrosTanque = carros[indice].litrosTanque + combustivel;
+            printf("Tanque abastecido! O tanque agora tem %.2f litros.", carros[indice].litrosTanque);
+        }
+        else
+        {
+            printf("Impossivel abastecer! Vai derramar!!!");
+        }
     }
     else
     {
@@ -693,12 +695,13 @@ void encherTanque(int ent, Carro carros[], int indice)
 void calibrarPneu(int ent, Carro carros[], int indice)
 {
     float libras;
-    printf("\n[Parâmetros:[0 a 20: Murcho]--[26 a 35: Ideal]\n[Libras atuais: %.2f]\nInforme quantas libras deseja adicionar à calibragem do pneu: ",
+    printf("\nParâmetros:[0 a 20: Murcho]--[26 a 35: Ideal]\n[Libras atuais: %.2f]\nInforme quantas libras deseja adicionar à calibragem do pneu: ",
            carros[indice].calibrePneu);
     scanf("%f", &libras);
 
     carros[indice].calibrePneu = carros[indice].calibrePneu + libras;
 
+    printf("Pneus calibrados! Agora estão com %.2f libras.", carros[indice].calibrePneu);
 }
 
 void limparVidro(int ent, Carro carros[], int indice)
@@ -718,8 +721,9 @@ void preencherClientes(Carro carros[])
 {
     for (int x = 0; x <= 9; x++)
     {
-        carros[x].modelo = sortearModelo();
-        carros[x].cor = sortearCor();
+        strcpy(carros[x].modelo,sortearModelo());
+        strcpy(carros[x].cor,sortearCor());
+
         carros[x].ano = sortearAno();
         carros[x].litrosTanque = sortearCombustivel();
         carros[x].limiteTanque = 72;
@@ -758,42 +762,42 @@ int main()
             posicao = menu();
             switch (posicao)
             {
-            case 1:
-            case 2:
-            case 3:
-                insertProdutoEstoque(ent, produto, &IL, &FL, posicao);
-                break;
-            case 4:
-                deleteById(ent, produto, &IL, &FL);
-                break;
-            case 5:
-                do
-                {
-                    insertVenda(vendas, produto, &IH, &FH, FL,resposta);
-                    printf("Deseja continuar inserindo vendas?(Y/N)");
-                    fflush(stdin);
-                    scanf("%s",resposta);
-                }
-                while (strcmp(resposta, "n") != 0 && strcmp(resposta, "N") != 0);
-                break;
-            case 6:
-                insertQuantidadeProdutoEstoque(ent, produto, &IL, &FL);
-                break;
-            case 7:
-                updateQuantidadeProdutoEstoque(ent, produto, &IL, &FL);
-                break;
-            case 8:
-                updatePrecoProduto(ent, produto, &IL, &FL);
-                break;
-            case 9:
-                generateRelatorioEstoque(produto, &IL, &FL);
-                break;
-            case 10:
-                generateRelatorioVendas(ent, vendas, &IH, &FH);
-                break;
-            case 11:
-                ordenarPorID(produto, FL);
-                break;
+                case 1:
+                case 2:
+                case 3:
+                    insertProdutoEstoque(ent, produto, &IL, &FL, posicao);
+                    break;
+                case 4:
+                    deleteById(ent, produto, &IL, &FL);
+                    break;
+                case 5:
+                    do
+                    {
+                        insertVenda(vendas, produto, &IH, &FH, FL,resposta);
+                        printf("Deseja continuar inserindo vendas?(Y/N)");
+                        fflush(stdin);
+                        scanf("%s",resposta);
+                    }
+                    while (strcmp(resposta, "n") != 0 && strcmp(resposta, "N") != 0);
+                    break;
+                case 6:
+                    insertQuantidadeProdutoEstoque(ent, produto, &IL, &FL);
+                    break;
+                case 7:
+                    updateQuantidadeProdutoEstoque(ent, produto, &IL, &FL);
+                    break;
+                case 8:
+                    updatePrecoProduto(ent, produto, &IL, &FL);
+                    break;
+                case 9:
+                    generateRelatorioEstoque(produto, &IL, &FL);
+                    break;
+                case 10:
+                    generateRelatorioVendas(ent, vendas, &IH, &FH);
+                    break;
+                case 11:
+                    ordenarPorID(produto, FL);
+                    break;
             }
 
 
@@ -803,24 +807,29 @@ int main()
     }
     if (ent == 3)
     {
+        int i;
+        preencherClientes(carros);
+
         do
         {
+            i = novoCliente();
             posicao = menuFrentista();
+            printf("\nUM NOVO CLIENTE CHEGOU!\n[Modelo: %s]--[Cor: %s]--[Ano: %d]--[Tanque: %.2f l]--[Pneus: %.2f lbs]--[Vidros: %d]"
+                    , carros[i].modelo, carros[i].cor, carros[i].ano, carros[i].litrosTanque, carros[i].calibrePneu, carros[i].vidroSujo);
             switch (posicao)
             {
-            case 1:
-                encherTanque(ent, carros, posicao);
-                break;
-            case 2:
-                calibrarPneu(ent, carros, posicao);
-                break;
-            case 3:
-                limparVidro(ent, carros, posicao);
-                break;
+                case 1:
+                    encherTanque(ent, carros, i);
+                    break;
+                case 2:
+                    calibrarPneu(ent, carros, i);
+                    break;
+                case 3:
+                    limparVidro(ent, carros, i);
+                    break;
             }
         }
         while (posicao != 0);
     }
     return 0;
 }
-
