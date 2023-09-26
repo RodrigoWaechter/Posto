@@ -540,12 +540,12 @@ void encherTanque(Carro carros[], int indice) {
 
         if (carros[indice].litrosTanque + combustivel < carros[indice].limiteTanque) {
             carros[indice].litrosTanque = carros[indice].litrosTanque + combustivel;
-            printf("Tanque abastecido! O tanque agora tem %.2f litros.", carros[indice].litrosTanque);
+            printf("\nTanque abastecido! O tanque agora tem %.2f litros.", carros[indice].litrosTanque);
         } else {
-            printf("Impossivel abastecer! Vai derramar!!!");
+            printf("\nImpossivel abastecer! Vai derramar!!!");
         }
     } else {
-        printf("O Tanque está cheio!");
+        printf("\nO Tanque está cheio!");
     }
 }
 
@@ -557,20 +557,20 @@ void calibrarPneu(Carro carros[], int indice) {
 
     carros[indice].calibrePneu = carros[indice].calibrePneu + libras;
 
-    printf("Pneus calibrados! Agora estão com %.2f libras.", carros[indice].calibrePneu);
+    printf("\nPneus calibrados! Agora estão com %.2f libras.", carros[indice].calibrePneu);
 }
 
 void limparVidro(Carro carros[], int indice) {
     if (carros[indice].vidroSujo == true) {
         carros[indice].vidroSujo = false;
     } else {
-        printf("O Vidro já está limpo!");
+        printf("\nO Vidro já está limpo!");
     }
 
 }
 
 void preencherClientes(Carro carros[]) {
-    for (int x = 0; x <= 9; x++) {
+    for (int x = 0; x < 10; x++) {
         strcpy(carros[x].modelo, sortearModelo());
         strcpy(carros[x].cor, sortearCor());
 
@@ -580,7 +580,6 @@ void preencherClientes(Carro carros[]) {
         carros[x].calibrePneu = sortearCalibragem();
         carros[x].vidroSujo = sortearVidro();
 
-        x++;
     }
 }
 
@@ -648,10 +647,11 @@ int main() {
 
         do {
             i = novoCliente();
-            posicao = menuFrentista();
-            printf("\nUM NOVO CLIENTE CHEGOU!\n[Modelo: %s]--[Cor: %s]--[Ano: %d]--[Tanque: %.2f l]--[Pneus: %.2f lbs]--[Vidros: %d]",
+            printf("\n\n\tUM NOVO CLIENTE CHEGOU!\n[Modelo: %s]--[Cor: %s]--[Ano: %d]--[Tanque: %.2f l]--[Pneus: %.2f "
+                   "lbs]--[Vidros: %d]",
                    carros[i].modelo, carros[i].cor, carros[i].ano, carros[i].litrosTanque, carros[i].calibrePneu,
                    carros[i].vidroSujo);
+            posicao = menuFrentista();
             switch (posicao) {
                 case 1:
                     encherTanque(carros, i);
