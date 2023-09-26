@@ -5,7 +5,7 @@
 #include <stdbool.h>
 
 
-#define MAX 10
+#define MAX 50
 #define IA 0
 #define MAX_TAMANHO_SENHA 50
 
@@ -19,7 +19,7 @@ typedef struct {
     int id;
     float preco;
     char nome[50];
-    char validade;
+    char validade[20];
     int qntd;
 } Produto;
 
@@ -44,6 +44,15 @@ typedef struct {
     float precoT;
 } Historico;
 
+Produto produtosPreDefinidos[] = {
+        {1, 10.0, "Banana", "31/12/2023", 750},
+        {2, 15.0, "Uva", "10/08/2023", 500},
+        {3, 20.0, "Bolacha", "13/11/2023", 300},
+        {4, 50.0, "Kiwi", "06/09/2023", 300},
+        {5, 5.0, "Carne", "27/12/2024", 600},
+        {6, 30.0, "Suco", "16/03/2024", 200},
+        {7, 25.0, "Bolacha", "02/03/2024", 300}
+};
 // FUNÇÕES DE MENU
 int login() {
     int ent;
@@ -116,30 +125,30 @@ int menuFrentista() {
 
 // OPERAÇÕES DE GERAÇÃO
 
-void generateNotaFiscal(Historico vendas[], int IH, int FH) {
-    for (int i = IH; i <= FH; ++i) {
-        printf("\n\t|===========================|");
-        printf("\n\t Produto: %s", vendas[i].nome);
-        printf("\n\t Quantidade: %d", vendas[i].qntd);
-        printf("\n\t Preço Unitário: %.2f", vendas[i].precoU);
-        printf("\n\t Preço Total: %.2f", vendas[i].precoT);
-        printf("\n\t|===========================|");
+void generateNotaFiscal(Historico vendas[], int IH,int FH) {
+    for (int i = IH; i < FH; i++) {
+        printf("\n\t|=========NOTA FISCAL===========|");
+        printf("\n\t| Produto: %s\t\t|", vendas[i].nome);
+        printf("\n\t| Quantidade: %d\t\t|", vendas[i].qntd);
+        printf("\n\t| Preço Unitário: %.2f\t\t|", vendas[i].precoU);
+        printf("\n\t| Preço Total: %.2f\t\t|", vendas[i].precoT);
+        printf("\n\t|===============================|");
     }
 }
 
 void generateRelatorioEstoque(Produto produto[], int *IL, int *FL) {
-    printf("\nLista Completa: ");
+    printf("\nRelatório de Estoque: ");
     for (int i = *IL; i <= *FL - 1; i++) {
-        printf("\n{Produto - %d} --- [Id: %d] --- [Nome: %s] --- [Preço: %.2f] --- [Validade: %s] --- [Quantidade: %d]\n",
+        printf("\n{Produto - %d} --- [Id: %d] --- [Nome: %s] --- [Preço: %.2f] --- [Validade: %s] --- [Quantidade: "
+               "%d]\n",
                i + 1, produto[i].id, produto[i].nome, produto[i].preco, produto[i].validade, produto[i].qntd);
     }
 }
 
 float generateRelatorioVendas(int ent, Historico vendas[], int *IH, int *FH) {
-    //IMPLEMENTAR PRINTAR AS VENDAS QUE FORAM FEITAS
     if (ent == 1) {
         printf("\nHistórico de Vendas: ");
-        for (int i = *IH; i <= *FH - 1; i++) {
+        for (int i = *IH; i < *FH; i++) {
             printf("\n[Produto: %s]--[Quantidade: %d]--[Preço Unitário: %.2f]--[Preço Total: %.2f]\n",
                    vendas[i].nome,
                    vendas[i].qntd, vendas[i].precoU, vendas[i].precoT);
@@ -153,7 +162,7 @@ float generateRelatorioVendas(int ent, Historico vendas[], int *IH, int *FH) {
 
 // OPERAÇÕES DE INSERÇÃO
 
-void insertVenda(Historico vendas[], Produto produto[], int *IH, int *FH, int FL) {
+void insertVenda(Historico vendas[], Produto produto[], int *IH, int *FH, int FL,char resposta[]) {
     int quantidadeVendida;
     char nomeProduto[50];
 
@@ -179,10 +188,11 @@ void insertVenda(Historico vendas[], Produto produto[], int *IH, int *FH, int FL
             vendas[*FH].precoT = quantidadeVendida * produto[posicao].preco;
             strcpy(vendas[*FH].nome, produto[posicao].nome);
 
-            (*IH)++;
             (*FH)++;
+if(strcmp(resposta, "n") != 0 && strcmp(resposta, "N") != 0) {
+    generateNotaFiscal(vendas, *IH, *FH);
+}
             printf("\nVenda registrada com sucesso!\n");
-            generateNotaFiscal(vendas, *IH, *FH);
         } else {
             printf("\nQuantidade insuficiente no estoque para realizar a venda.\n");
         }
@@ -280,7 +290,6 @@ void insertProdutoEstoque(int ent, Produto produto[], int *IL, int *FL, int posi
 }
 
 float insertQuantidadeProdutoEstoque(int ent, Produto produto[], int *IL, int *FL) {
-    //IMPLEMENTAR AUMENTAR A QUANDIDADE DE UM PRODUTO NO ESTOQUE SELECIONADO PELO ID DELE
     if (ent == 2 || ent == 1) {
         int id, maisQntd;
         bool idExiste = false;
@@ -312,7 +321,6 @@ float insertQuantidadeProdutoEstoque(int ent, Produto produto[], int *IL, int *F
 // OPERAÇÕES DE ORDENAÇÃO
 
 void ordenarPorID(Produto produto[], int FL) {
-    //IMPLEMENTAR BUBBLESORT
     Produto aux;
     for (int i = 0; i < FL; ++i) {
         for (int j = 0; j < FL - i - 1; ++j) {
@@ -560,11 +568,18 @@ void preencherClientes(Carro carros[]) {
 int main() {
     setlocale(LC_ALL, "Portuguese");
 
-    Produto produto[MAX];
+    Produto produto[MAX] ;
     Historico vendas[MAX];
     Carro carros[10];
+char resposta[10];
     int ent, posicao, IL = 0, FL = 0;
     int IH = 0, FH = 0;
+
+    int totalProdutosPreDefinidos = 7;
+    for (int i = 0; i < totalProdutosPreDefinidos; i++) {
+        produto[i] = produtosPreDefinidos[i];
+        FL++;
+    }
 
     ent = 1;//Valor definido para pular o sistema de login para facilitar testar o sistema
     //  ent = login();
@@ -584,7 +599,12 @@ int main() {
                     deleteById(ent, produto, &IL, &FL);
                     break;
                 case 5:
-                    insertVenda(vendas, produto, &IH, &FH, FL);
+                   do {
+                       insertVenda(vendas, produto, &IH, &FH, FL,resposta);
+                       printf("Deseja continuar inserindo vendas?(Y/N)");
+                       fflush(stdin);
+                       scanf("%s",resposta);
+                   } while (strcmp(resposta, "n") != 0 && strcmp(resposta, "N") != 0);
                     break;
                 case 6:
                     insertQuantidadeProdutoEstoque(ent, produto, &IL, &FL);
@@ -608,6 +628,7 @@ int main() {
     }
     if (ent == 3) {
         do {
+            posicao = menuFrentista();
             switch (posicao) {
                 case 1:
                     encherTanque(ent, carros, posicao);
