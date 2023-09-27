@@ -85,7 +85,7 @@ int menu() {
     printf("\n\t2. Meio da lista (Apenas gerente)");
     printf("\n\t3. Final da lista (Apenas gerente)");
     printf("\n\t4. Deletar pelo ID (Apenas gerente)");
-    printf("\n\t5. Inserir quantidade do produto(Apenas gerente)");
+    printf("\n\t5. Comprar produto(Apenas gerente)");
     printf("\n\t6. Ordenar por Id(Apenas gerente)");
     printf("\n\t7. Inserir Venda");
     printf("\n\t8. Atualizar quantidade do produto");
@@ -312,7 +312,7 @@ void insertQuantidadeProdutoEstoque(Produto produto[], int *IL, int *FL) {
     int id, maisQntd;
     bool idExiste = false;
 
-    printf("\nInforme o ID do produto que desejas atualizar: ");
+    printf("\nInforme o ID do produto que desejas comprar: ");
     scanf("%d", &id);
 
     for (int i = *IL; i < *FL; ++i) {
@@ -322,11 +322,14 @@ void insertQuantidadeProdutoEstoque(Produto produto[], int *IL, int *FL) {
         }
     }
     if (idExiste == true) {
-        printf("\nQuantas unidades deseja adicionar no estoque: ");
+        printf("\n{Quantidade atual: %d}\nQuantas unidades deseja adicionar ao estoque: ", produto[id - 1].qntd);
         scanf("%d", &maisQntd);
 
-        produto[id].qntd = produto[id].qntd + maisQntd;
-
+        if (maisQntd > 0) {
+            produto[id - 1].qntd = produto[id - 1].qntd + maisQntd;
+        } else {
+            printf("\nValor inválido.");
+        }
     } else {
         printf("Id não encontrado...");
     }
@@ -381,30 +384,33 @@ void deleteById(int ent, Produto produto[], int *IL, int *FL) {
 
 // OPERAÇÕES DE ATUALIZAÇÃO
 
-void updateQuantidadeProdutoEstoque(Produto produto[], int *IL, int *FL) {
-    int id, newQntd;
-    bool idExiste = false;
+void updateQuantidadeProdutoEstoque(int ent, Produto produto[], int *IL, int *FL) {
+    if (ent == 1) {
 
-    printf("\nInforme o ID do produto que desejas atualizar: ");
-    scanf("%d", &id);
+        int id, newQntd;
+        bool idExiste = false;
 
-    for (int i = *IL; i < *FL; ++i) {
-        if (produto[i].id == id) {
-            idExiste = true;
-            break;
+        printf("\nInforme o ID do produto que desejas atualizar: ");
+        scanf("%d", &id);
+
+        for (int i = *IL; i < *FL; ++i) {
+            if (produto[i].id == id) {
+                idExiste = true;
+                break;
+            }
         }
-    }
-    if (idExiste == true) {
-        printf("\n{Quantidade atual: %d}\nQuantidade desejada: ", produto[id - 1].qntd);
-        scanf("%d", &newQntd);
-        if (newQntd >= 0) {
-            produto[id - 1].qntd = newQntd;
+        if (idExiste == true) {
+            printf("\n{Quantidade atual: %d}\nQuantidade desejada: ", produto[id - 1].qntd);
+            scanf("%d", &newQntd);
+            if (newQntd >= 0) {
+                produto[id - 1].qntd = newQntd;
+            } else {
+                printf("Quantidade inválida!");
+            }
+
         } else {
-            printf("Quantidade inválida!");
+            printf("Id não encontrado...");
         }
-
-    } else {
-        printf("Id não encontrado...");
     }
 }
 
@@ -644,7 +650,7 @@ int main() {
                     } while (strcmp(resposta, "n") != 0 && strcmp(resposta, "N") != 0);
                     break;
                 case 8:
-                    updateQuantidadeProdutoEstoque(produto, &IL, &FL);
+                    updateQuantidadeProdutoEstoque(ent, produto, &IL, &FL);
                     break;
                 case 9:
                     updatePrecoProduto(produto, &IL, &FL);
