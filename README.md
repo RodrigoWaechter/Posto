@@ -7,28 +7,32 @@
 
 ## Funcionalidades
  ### Frentista:
- - **Gerar Relatório do Estoque:** Permite que o frentista verifique a disponibilidade de produtos no estoque. O sistema fornece uma lista completa dos itens armazenados com informações detalhadas, como quantidade, preço e validade.
- - **Vender Unidades de Produto:** Possibilita ao frentista realizar vendas de produtos aos clientes. O frentista insere o código do produto e a quantidade desejada, com atualização automática do estoque e cálculo do preço final.
- - **Gerar Nota de Venda:** Após uma venda bem-sucedida, o frentista pode gerar uma nota fiscal com informações essenciais, como produto, quantidade, preço unitário e preço final.
+ - **Encher Tanque do Carro:** Preenche o tanque do veículo com a quantidade desejada de combustível.
+ - **Calibrar Pneu:** Ajusta a pressão dos pneus do veículo de acordo com a especificação.
+ - **Limpar Vidro:** Limpa os vidros do veículo.
 
 ### Caixa:
-  O Caixa possui todas as funcionalidades do Frentista e ainda pode:
+ O Caixa é o operador da caixa registradora e responsável pelas vendas. Suas funções incluem:
 
-- **Cadastrar Produto no Estoque:** No início do dia, o Caixa preenche o estoque com os produtos disponíveis, inserindo informações como código, nome, preço, quantidade, validade e categoria.
+- **Cadastrar Venda:** Registra a venda de produtos, gerando uma nota fiscal com informações sobre os produtos adquiridos.
 
 - **Atualizar Produto no Estoque:** Permite ao Caixa atualizar informações de produtos, como preço, quantidade e categoria.
 
-- **Ordenar Produtos do Estoque:** Facilita a organização do estoque, possibilitando a ordenação por diferentes critérios, como código, quantidade, preço, validade e categoria.
+- **Gerar Relatório de Estoque:** Retorna uma lista completa dos produtos em estoque com suas informações.
 
-- **Gerar Receita do Fim de Dia:** No fechamento do caixa, o sistema gera um relatório com a receita total do dia, exibindo o valor arrecadado.
+- **Gerar Receita do Fim de Dia:** Gera um relatório para fechamento de caixa, apresentando o histórico de vendas durante o período de trabalho.
+  
+  O Caixa pode também verificar o estoque, atualizá-lo e gerar relatórios para garantir um controle eficiente sobre os produtos disponíveis.
 
 ### Gerente:
-  O Gerente tem acesso a todas as funcionalidades dos Frentistas e Caixas e pode executar ações adicionais, incluindo:
-
-- **Comprar Produtos:** Permite ao Gerente comprar produtos para o estoque, especificando o código do produto e a quantidade desejada. O sistema fornece um prazo de entrega e uma nota fiscal da compra.
-
+  O Gerente é a autoridade máxima do posto e tem acesso a todas as funcionalidades do sistema. Suas operações incluem:
+  
+- **Cadastrar Produto:** Adiciona um novo produto ao estoque, fornecendo informações como código, nome, preço, quantidade e validade.
+- **Comprar Produtos:** Permite a compra de produtos, inserindo o código e a quantidade desejada, recebendo um prazo de entrega e uma nota fiscal.
+- **Ordenar Produtos:** Reorganiza o estoque exibindo os produtos em ordem crescente de ID.
 - **Deletar Produtos:** Permite ao Gerente excluir produtos do estoque, independentemente dos valores em seus campos.
 
+O Gerente tem controle total sobre a gestão do estoque, podendo adicionar, comprar, ordenar e excluir produtos conforme necessário.
 ## Uso do Sistema
   Os funcionários do posto de combustível acessam o sistema escolhendo sua função (Frentista, Caixa ou Gerente) e realizam as operações correspondentes. O sistema fornece menus intuitivos para guiar os usuários durante as interações.
 
