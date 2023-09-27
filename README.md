@@ -1,5 +1,9 @@
 
 # Sistema de Gerenciamento de Estoque do Posto Esquinão
+<div align="center">
+<img src="https://github.com/RodrigoWaechter/PostoEsquinao/assets/128084451/e0e2232f-4745-460e-bb27-5525c08167a7" width="700px" />
+</div>
+
 >Status: Developing
 
 ## Descrição do Projeto
@@ -49,7 +53,7 @@ O Gerente tem controle total sobre a gestão do estoque, podendo adicionar, comp
 
 # Tecnologias/Ferramentas Utilizadas
 ### O sistema será desenvolvido utilizando as seguintes tecnologias:
-- Linguagem de Programação: C/C++
+- Linguagem de Programação: C
 - [Trello](https://trello.com/b/zuyIEfQr/o-esquin%C3%A3o-organiza%C3%A7%C3%A3o): Usado para gerenciar tarefas e organização do projeto.
 
 # Autores
