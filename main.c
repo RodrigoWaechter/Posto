@@ -278,7 +278,6 @@ void insertFim(Produto produto[], int *IL, int *FL) {
     (*FL)++;
 }
 
-
 void insertProdutoEstoque(int ent, Produto produto[], int *IL, int *FL, int posicao) {
     int k;
     if (*FL == MAX) {
@@ -308,6 +307,11 @@ void insertProdutoEstoque(int ent, Produto produto[], int *IL, int *FL, int posi
     }
 }
 
+int sortearDia(){
+    int dia = rand() % 10;
+    return dia;
+}
+
 void insertQuantidadeProdutoEstoque(Produto produto[], int *IL, int *FL) {
     int id, maisQntd;
     bool idExiste = false;
@@ -327,6 +331,8 @@ void insertQuantidadeProdutoEstoque(Produto produto[], int *IL, int *FL) {
 
         if (maisQntd > 0) {
             produto[id - 1].qntd = produto[id - 1].qntd + maisQntd;
+            printf("\nSua compra chegará em %d dias.",sortearDia());
+
         } else {
             printf("\nValor inválido.");
         }
@@ -526,7 +532,6 @@ int sortearAno() {
     int ano = rand() % 24 + 2000;
     return ano;
 }
-
 int novoCliente() {
     int cliente = rand() % 10;
     return cliente;
