@@ -132,6 +132,9 @@ void generateNotaFiscal(Historico vendas[], int IH, int FH) {
 
 void generateRelatorioEstoque(Produto produto[], int *IL, int *FL) {
     printf("\nRelatório de Estoque: ");
+    if (*FL == 0) {
+        printf("\nEstoque vazio. :(");
+    }
     for (int i = *IL; i <= *FL - 1; i++) {
         printf("\n{Produto - %d} --- [Id: %d] --- [Nome: %s] --- [Preço: %.2f] --- [Validade: %s] --- [Quantidade: "
                "%d]\n",
@@ -141,6 +144,9 @@ void generateRelatorioEstoque(Produto produto[], int *IL, int *FL) {
 
 void generateRelatorioVendas(Historico vendas[], int *IH, int *FH) {
     printf("\nHistórico de Vendas: ");
+    if (*FH == 0) {
+        printf("\nNenhuma venda efetuada até o momento.");
+    }
     for (int i = *IH; i < *FH; i++) {
         printf("\n[Produto: %s]--[Quantidade: %d]--[Preço Unitário: %.2f]--[Preço Total: %.2f]\n",
                vendas[i].nome,
@@ -151,12 +157,12 @@ void generateRelatorioVendas(Historico vendas[], int *IH, int *FH) {
 void inicializarProdutosPreDefinidos(Produto produto[], int FL, int totalProdutosPreDefinidos) {
     Produto produtosPreDefinidos[] =
             {
-                    {1, 10.0, "Banana",  "31/12/2023", 750},
-                    {2, 15.0, "Uva",     "10/08/2023", 500},
-                    {3, 20.0, "Bolacha", "13/11/2023", 300},
-                    {4, 50.0, "Kiwi",    "06/09/2023", 300},
-                    {5, 5.0,  "Carne",   "27/12/2024", 600},
-                    {6, 30.0, "Suco",    "16/03/2024", 200},
+                    {1, 32.0, "Filtro",  "31/12/2025", 132},
+                    {2, 78.0, "Palheta", "10/08/2025", 36},
+                    {3, 61.0, "Oleo 1L", "13/11/2027", 200},
+                    {4, 170.0,"Oleo 3L", "06/09/2028", 120},
+                    {5, 12.0, "Refri 2L","27/02/2024", 43},
+                    {6, 30.0, "Salgadinho","16/03/2024", 17},
                     {7, 25.0, "Bolacha", "02/03/2024", 300}
             };
     for (int i = 0; i < totalProdutosPreDefinidos; i++) {
@@ -171,7 +177,7 @@ void insertVenda(Historico vendas[], Produto produto[], int *IH, int *FH, int FL
     int quantidadeVendida;
 
     char nomeProduto[50];
-
+    
     printf("\nInforme o Nome do produto e a Quantidade vendida: ");
     scanf("%s%d", nomeProduto, &quantidadeVendida);
 
@@ -307,7 +313,7 @@ void insertProdutoEstoque(int ent, Produto produto[], int *IL, int *FL, int posi
     }
 }
 
-int sortearDia(){
+int sortearDia() {
     int dia = rand() % 10;
     return dia;
 }
@@ -315,7 +321,9 @@ int sortearDia(){
 void insertQuantidadeProdutoEstoque(Produto produto[], int *IL, int *FL) {
     int id, maisQntd;
     bool idExiste = false;
-
+    for (int i = *IL; i <= *FL - 1; i++) {
+        printf("\n{Produto - %d} --- [Id: %d] --- [Nome: %s] --- [Quantidade: %d]", i + 1, produto[i].id, produto[i].nome,produto[i].qntd);
+    }
     printf("\nInforme o ID do produto que desejas comprar: ");
     scanf("%d", &id);
 
@@ -326,12 +334,12 @@ void insertQuantidadeProdutoEstoque(Produto produto[], int *IL, int *FL) {
         }
     }
     if (idExiste == true) {
-        printf("\n{Quantidade atual: %d}\nQuantas unidades deseja adicionar ao estoque: ", produto[id - 1].qntd);
+        printf("\nQuantas unidades deseja adicionar ao estoque: ");
         scanf("%d", &maisQntd);
 
         if (maisQntd > 0) {
             produto[id - 1].qntd = produto[id - 1].qntd + maisQntd;
-            printf("\nSua compra chegará em %d dias.",sortearDia());
+            printf("\nSua compra chegará em %d dias.", sortearDia());
 
         } else {
             printf("\nValor inválido.");
@@ -343,18 +351,20 @@ void insertQuantidadeProdutoEstoque(Produto produto[], int *IL, int *FL) {
 
 // OPERAÇÕES DE ORDENAÇÃO
 
-void ordenarPorID(Produto produto[], int FL) {
-    Produto aux;
-    for (int i = 0; i < FL; ++i) {
-        for (int j = 0; j < FL - i - 1; ++j) {
-            if (produto[j].id > produto[j + 1].id) {
-                aux = produto[j];
-                produto[j] = produto[j + 1];
-                produto[j + 1] = aux;
+void ordenarPorID(int ent, Produto produto[], int FL) {
+    if (ent == 1) {
+        Produto aux;
+        for (int i = 0; i < FL; ++i) {
+            for (int j = 0; j < FL - i - 1; ++j) {
+                if (produto[j].id > produto[j + 1].id) {
+                    aux = produto[j];
+                    produto[j] = produto[j + 1];
+                    produto[j + 1] = aux;
+                }
             }
         }
+        printf("\nOrdenação por ID concluída.");
     }
-    printf("\nOrdenação por ID concluída.");
 }
 
 // OPERAÇÕES DE EXCLUSÃO
@@ -362,7 +372,9 @@ void ordenarPorID(Produto produto[], int FL) {
 void deleteById(int ent, Produto produto[], int *IL, int *FL) {
     if (ent == 1) {
         int id, posicao = -1;
-
+        for (int i = *IL; i <= *FL - 1; i++) {
+            printf("\n{Produto - %d} --- [Id: %d] --- [Nome: %s]", i + 1, produto[i].id, produto[i].nome);
+        }
         printf("\nInforme o ID do produto que desejas deletar: ");
         scanf("%d", &id);
 
@@ -395,8 +407,10 @@ void updateQuantidadeProdutoEstoque(int ent, Produto produto[], int *IL, int *FL
 
         int id, newQntd;
         bool idExiste = false;
-
-        printf("\nInforme o ID do produto que desejas atualizar: ");
+        for (int i = *IL; i <= *FL - 1; i++) {
+            printf("\n{Produto - %d} --- [Id: %d] --- [Nome: %s] --- [Quantidade: %d]", i + 1, produto[i].id, produto[i].nome,produto[i].qntd);
+        }
+        printf("\nInforme o ID do produto que desejas atualizar a quantidade: ");
         scanf("%d", &id);
 
         for (int i = *IL; i < *FL; ++i) {
@@ -406,7 +420,7 @@ void updateQuantidadeProdutoEstoque(int ent, Produto produto[], int *IL, int *FL
             }
         }
         if (idExiste == true) {
-            printf("\n{Quantidade atual: %d}\nQuantidade desejada: ", produto[id - 1].qntd);
+            printf("\nQuantidade desejada: ");
             scanf("%d", &newQntd);
             if (newQntd >= 0) {
                 produto[id - 1].qntd = newQntd;
@@ -424,7 +438,10 @@ void updatePrecoProduto(Produto produto[], int *IL, int *FL) {
     int id;
     float newPreco;
     bool idExiste = false;
-
+    for (int i = *IL; i <= *FL - 1; i++) {
+        printf("\n{Produto - %d} --- [Id: %d] --- [Nome: %s] --- [Preço: %.2f]", i + 1, produto[i].id, produto[i].nome,
+               produto[i].preco);
+    }
     printf("\nInforme o ID do produto que desejas atualizar: ");
     scanf("%d", &id);
 
@@ -532,6 +549,7 @@ int sortearAno() {
     int ano = rand() % 24 + 2000;
     return ano;
 }
+
 int novoCliente() {
     int cliente = rand() % 10;
     return cliente;
@@ -644,7 +662,7 @@ int main() {
                     insertQuantidadeProdutoEstoque(produto, &IL, &FL);
                     break;
                 case 6:
-                    ordenarPorID(produto, FL);
+                    ordenarPorID(ent, produto, FL);
                     break;
                 case 7:
                     do {
