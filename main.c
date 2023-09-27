@@ -69,11 +69,9 @@ int login() {
                 return ent;
             } else {
                 printf("\nSenha incorreta. Tente novamente.");
-                //return -1;
             }
         } else {
-            printf("\nOpção inválida.Selecione outra.");
-            // return -1;
+            printf("\nOpção inválida, selecione outra.");
         }
     } while (1 || 2 || 3);
 }
@@ -81,19 +79,19 @@ int login() {
 int menu() {
     int posicao;
     printf("\n---------------------------------------");
-    printf("\nInforme onde deseja inserir o produto:");
-    printf("\n\t0. Sair");
+    printf("\nAcões do gerente ou caixa:");
+    printf("\n\t0. Gerar relatório do estoque");
     printf("\n\t1. Início da lista (Apenas gerente)");
     printf("\n\t2. Meio da lista (Apenas gerente)");
     printf("\n\t3. Final da lista (Apenas gerente)");
     printf("\n\t4. Deletar pelo ID (Apenas gerente)");
-    printf("\n\t5. Inserir Venda");
-    printf("\n\t6. Inserir quantidade do produto");
-    printf("\n\t7. Atualizar quantidade do produto");
-    printf("\n\t8. Atualizar o preço do produto");
-    printf("\n\t9. Gerar relatório do estoque");
+    printf("\n\t5. Inserir quantidade do produto(Apenas gerente)");
+    printf("\n\t6. Ordenar por Id(Apenas gerente)");
+    printf("\n\t7. Inserir Venda");
+    printf("\n\t8. Atualizar quantidade do produto");
+    printf("\n\t9. Atualizar o preço do produto");
     printf("\n\t10. Gerar relatório de vendas");
-    printf("\n\t11. Ordenar por Id");
+    printf("\n\t11. Sair");
     printf("\n---------------------------------------");
     printf("\nPosição escolhida: ");
     scanf("%d", &posicao);
@@ -103,11 +101,12 @@ int menu() {
 int menuFrentista() {
     int posicao;
     printf("\n---------------------------------------");
-    printf("\nInforme onde deseja inserir o produto:");
+    printf("\nAções do frentista:");
     printf("\n\t0. Sair");
     printf("\n\t1. Encher tanque");
     printf("\n\t2. Calibrar pneus");
     printf("\n\t3. Limpar vidros");
+    printf("\n\t4. Chamar novo cliente");
     printf("\n---------------------------------------");
     printf("\nPosição escolhida: ");
     scanf("%d", &posicao);
@@ -140,14 +139,13 @@ void generateRelatorioEstoque(Produto produto[], int *IL, int *FL) {
     }
 }
 
-float generateRelatorioVendas(Historico vendas[], int *IH, int *FH) {
-        printf("\nHistórico de Vendas: ");
-        for (int i = *IH; i < *FH; i++) {
-            printf("\n[Produto: %s]--[Quantidade: %d]--[Preço Unitário: %.2f]--[Preço Total: %.2f]\n",
-                   vendas[i].nome,
-                   vendas[i].qntd, vendas[i].precoU, vendas[i].precoT);
-        }
-    return -1;
+void generateRelatorioVendas(Historico vendas[], int *IH, int *FH) {
+    printf("\nHistórico de Vendas: ");
+    for (int i = *IH; i < *FH; i++) {
+        printf("\n[Produto: %s]--[Quantidade: %d]--[Preço Unitário: %.2f]--[Preço Total: %.2f]\n",
+               vendas[i].nome,
+               vendas[i].qntd, vendas[i].precoU, vendas[i].precoT);
+    }
 }
 
 void inicializarProdutosPreDefinidos(Produto produto[], int FL, int totalProdutosPreDefinidos) {
@@ -311,27 +309,27 @@ void insertProdutoEstoque(int ent, Produto produto[], int *IL, int *FL, int posi
 }
 
 void insertQuantidadeProdutoEstoque(Produto produto[], int *IL, int *FL) {
-        int id, maisQntd;
-        bool idExiste = false;
+    int id, maisQntd;
+    bool idExiste = false;
 
-        printf("\nInforme o ID do produto que desejas atualizar: ");
-        scanf("%d", &id);
+    printf("\nInforme o ID do produto que desejas atualizar: ");
+    scanf("%d", &id);
 
-        for (int i = *IL; i < *FL; ++i) {
-            if (produto[i].id == id) {
-                idExiste = true;
-                break;
-            }
+    for (int i = *IL; i < *FL; ++i) {
+        if (produto[i].id == id) {
+            idExiste = true;
+            break;
         }
-        if (idExiste == true) {
-            printf("\nQuantas unidades deseja adicionar no estoque: ");
-            scanf("%d", &maisQntd);
+    }
+    if (idExiste == true) {
+        printf("\nQuantas unidades deseja adicionar no estoque: ");
+        scanf("%d", &maisQntd);
 
-            produto[id].qntd = produto[id].qntd + maisQntd;
+        produto[id].qntd = produto[id].qntd + maisQntd;
 
-        } else {
-            printf("Id não encontrado...");
-        }
+    } else {
+        printf("Id não encontrado...");
+    }
 }
 
 // OPERAÇÕES DE ORDENAÇÃO
@@ -347,7 +345,7 @@ void ordenarPorID(Produto produto[], int FL) {
             }
         }
     }
-
+    printf("\nOrdenação por ID concluída.");
 }
 
 // OPERAÇÕES DE EXCLUSÃO
@@ -384,58 +382,57 @@ void deleteById(int ent, Produto produto[], int *IL, int *FL) {
 // OPERAÇÕES DE ATUALIZAÇÃO
 
 void updateQuantidadeProdutoEstoque(Produto produto[], int *IL, int *FL) {
-        int id, newQntd;
-        bool idExiste = false;
+    int id, newQntd;
+    bool idExiste = false;
 
-        printf("\nInforme o ID do produto que desejas atualizar: ");
-        scanf("%d", &id);
+    printf("\nInforme o ID do produto que desejas atualizar: ");
+    scanf("%d", &id);
 
-        for (int i = *IL; i < *FL; ++i) {
-            if (produto[i].id == id) {
-                idExiste = true;
-                break;
-            }
+    for (int i = *IL; i < *FL; ++i) {
+        if (produto[i].id == id) {
+            idExiste = true;
+            break;
         }
-        if (idExiste == true) {
-            printf("\n{Quantidade atual: %d}\nQuantidade desejada: ", produto[id - 1].qntd);
-            scanf("%d", &newQntd);
-            if (newQntd >= 0) {
-                produto[id - 1].qntd = newQntd;
-            } else {
-                printf("Quantidade inválida!");
-            }
-
+    }
+    if (idExiste == true) {
+        printf("\n{Quantidade atual: %d}\nQuantidade desejada: ", produto[id - 1].qntd);
+        scanf("%d", &newQntd);
+        if (newQntd >= 0) {
+            produto[id - 1].qntd = newQntd;
         } else {
-            printf("Id não encontrado...");
+            printf("Quantidade inválida!");
         }
+
+    } else {
+        printf("Id não encontrado...");
+    }
 }
 
 void updatePrecoProduto(Produto produto[], int *IL, int *FL) {
-        int id;
-        float newPreco;
-        bool idExiste = false;
+    int id;
+    float newPreco;
+    bool idExiste = false;
 
-        printf("\nInforme o ID do produto que desejas atualizar: ");
-        scanf("%d", &id);
+    printf("\nInforme o ID do produto que desejas atualizar: ");
+    scanf("%d", &id);
 
-        for (int i = *IL; i < *FL; ++i) {
-            if (produto[i].id == id) {
-                idExiste = true;
-                break;
-            }
+    for (int i = *IL; i < *FL; ++i) {
+        if (produto[i].id == id) {
+            idExiste = true;
+            break;
         }
-        if (idExiste == true) {
-            printf("\nInforme o novo preço do produto: R$");
-            scanf("%f", &newPreco);
-            if (newPreco >= 0) {
-                produto[id - 1].preco = newPreco;
-            } else {
-                printf("Preço inválido!");
-            }
-
+    }
+    if (idExiste == true) {
+        printf("\nInforme o novo preço do produto: R$");
+        scanf("%f", &newPreco);
+        if (newPreco >= 0) {
+            produto[id - 1].preco = newPreco;
         } else {
-            printf("Id não encontrado...");
+            printf("Preço inválido!");
         }
+    } else {
+        printf("Id não encontrado...");
+    }
 }
 
 // INTERAÇÃO COM VEÍCULO
@@ -531,38 +528,53 @@ int novoCliente() {
 
 void encherTanque(Carro carros[], int indice) {
     float combustivel;
+
     if (carros[indice].litrosTanque != carros[indice].limiteTanque) {
         printf("\n[Capacidade do Tanque: %.2f]--[Litros atuais: %.2f]\nInforme quantos litros de combustível deseja "
                "adicionar ao tanque: ",
                carros[indice].limiteTanque, carros[indice].litrosTanque);
         scanf("%f", &combustivel);
 
-
-        if (carros[indice].litrosTanque + combustivel < carros[indice].limiteTanque) {
-            carros[indice].litrosTanque = carros[indice].litrosTanque + combustivel;
-            printf("\nTanque abastecido! O tanque agora tem %.2f litros.", carros[indice].litrosTanque);
+        if (combustivel > 0) {
+            if (carros[indice].litrosTanque + combustivel < carros[indice].limiteTanque) {
+                carros[indice].litrosTanque = carros[indice].litrosTanque + combustivel;
+                printf("\nTanque abastecido! O tanque agora tem %.2f litros.", carros[indice].litrosTanque);
+            } else {
+                printf("\nImpossivel abastecer! Vai derramar!!!");
+            }
         } else {
-            printf("\nImpossivel abastecer! Vai derramar!!!");
+            printf("\nValor inválido.");
         }
     } else {
         printf("\nO Tanque está cheio!");
     }
+    return;
 }
 
 void calibrarPneu(Carro carros[], int indice) {
+    float totalLibras = 0;
     float libras;
     printf("\nParâmetros:[0 a 20: Murcho]--[26 a 35: Ideal]\n[Libras atuais: %.2f]\nInforme quantas libras deseja adicionar à calibragem do pneu: ",
            carros[indice].calibrePneu);
     scanf("%f", &libras);
 
-    carros[indice].calibrePneu = carros[indice].calibrePneu + libras;
-
-    printf("\nPneus calibrados! Agora estão com %.2f libras.", carros[indice].calibrePneu);
+    if (libras > 0) {
+        totalLibras = carros[indice].calibrePneu + libras;
+        if (totalLibras > 40) {
+            printf("\nImpossível colocar essa quantidade.");
+            return;
+        }
+        printf("\nPneus calibrados! Agora estão com %.2f libras.", totalLibras);
+    } else {
+        printf("\nValor inválido.");
+    }
+    return;
 }
 
 void limparVidro(Carro carros[], int indice) {
     if (carros[indice].vidroSujo == true) {
         carros[indice].vidroSujo = false;
+        printf("\nOs vidros foram limpos!");
     } else {
         printf("\nO Vidro já está limpo!");
     }
@@ -591,18 +603,24 @@ int main() {
     Carro carros[10];
     char resposta[10];
     int ent, posicao, IL = 0;
-    int IH = 0, FH = 0;
-
-    int totalProdutosPreDefinidos = 7;
-    int FL = totalProdutosPreDefinidos;
-    inicializarProdutosPreDefinidos(produto, FL, totalProdutosPreDefinidos);
+    int IH = 0, FH = 0, FL = 0;
 
     ent = login();
+    if (ent == 2) {
 
+        int totalProdutosPreDefinidos = 7;
+
+        FL = totalProdutosPreDefinidos;
+
+        inicializarProdutosPreDefinidos(produto, FL, totalProdutosPreDefinidos);
+    }
     if (ent == 1 || ent == 2) {
         do {
             posicao = menu();
             switch (posicao) {
+                case 0:
+                    generateRelatorioEstoque(produto, &IL, &FL);
+                    break;
                 case 1:
                 case 2:
                 case 3:
@@ -612,6 +630,12 @@ int main() {
                     deleteById(ent, produto, &IL, &FL);
                     break;
                 case 5:
+                    insertQuantidadeProdutoEstoque(produto, &IL, &FL);
+                    break;
+                case 6:
+                    ordenarPorID(produto, FL);
+                    break;
+                case 7:
                     do {
                         insertVenda(vendas, produto, &IH, &FH, FL, resposta);
                         printf("Deseja continuar inserindo vendas?(Y/N)");
@@ -619,39 +643,35 @@ int main() {
                         scanf("%s", resposta);
                     } while (strcmp(resposta, "n") != 0 && strcmp(resposta, "N") != 0);
                     break;
-                case 6:
-                    insertQuantidadeProdutoEstoque(produto, &IL, &FL);
-                    break;
-                case 7:
+                case 8:
                     updateQuantidadeProdutoEstoque(produto, &IL, &FL);
                     break;
-                case 8:
-                    updatePrecoProduto(produto, &IL, &FL);
-                    break;
                 case 9:
-                    generateRelatorioEstoque(produto, &IL, &FL);
+                    updatePrecoProduto(produto, &IL, &FL);
                     break;
                 case 10:
                     generateRelatorioVendas(vendas, &IH, &FH);
                     break;
                 case 11:
-                    ordenarPorID(produto, FL);
                     break;
+                default:
+                    printf("\nOpção inválida, selecione outra.");
             }
-            generateRelatorioEstoque(produto, &IL, &FL);
-        } while (posicao != 0);
+        } while (posicao != 11);
     }
     if (ent == 3) {
-        int i;
+        int posicaoFrentista;
+
+        int i = novoCliente();
         preencherClientes(carros);
 
+        printf("\n\nUM NOVO CLIENTE CHEGOU!\n[Modelo: %s]--[Cor: %s]--[Ano: %d]--[Tanque: %.2f l]--[Pneus: %.2f lbs]--[Vidros: %s]",
+               carros[i].modelo, carros[i].cor, carros[i].ano, carros[i].litrosTanque, carros[i].calibrePneu,
+               carros[i].vidroSujo ? "Sujo" : "Limpo");
+
         do {
-            i = novoCliente();
-            printf("\n\n\tUM NOVO CLIENTE CHEGOU!\n[Modelo: %s]--[Cor: %s]--[Ano: %d]--[Tanque: %.2f l]--[Pneus: %.2f "
-                   "lbs]--[Vidros: %d]",
-                   carros[i].modelo, carros[i].cor, carros[i].ano, carros[i].litrosTanque, carros[i].calibrePneu,
-                   carros[i].vidroSujo);
             posicao = menuFrentista();
+
             switch (posicao) {
                 case 1:
                     encherTanque(carros, i);
@@ -662,8 +682,20 @@ int main() {
                 case 3:
                     limparVidro(carros, i);
                     break;
+                case 4:
+                    i = novoCliente();
+                    printf("\n\nUM NOVO CLIENTE CHEGOU!\n[Modelo: %s]--[Cor: %s]--[Ano: %d]--[Tanque: %.2f l]--[Pneus: %.2f "
+                           "lbs]--[Vidros: %s]",
+                           carros[i].modelo, carros[i].cor, carros[i].ano, carros[i].litrosTanque,
+                           carros[i].calibrePneu,
+                           carros[i].vidroSujo ? "Sujo" : "Limpo");
+                    break;
+                default:
+                    printf("\nOpção inválida, selecione outra.");
             }
+
         } while (posicao != 0);
+
     }
     return 0;
 }
