@@ -180,7 +180,6 @@ void consultarPorID(Produto produto[], int *IL, int *FL) {
     //Procura na lista a posição informada
     posicao = procurarProdutoPorID(produto, IL, FL, id);
 
-
     //Verifica se a posição foi encontrada
     if (posicao != -1) {
         printf("\n{Produto - %d} --- [Id: %d] --- [Nome: %s] --- [Preço: %.2f] --- [Validade: %s] --- [Quantidade: "
@@ -192,7 +191,6 @@ void consultarPorID(Produto produto[], int *IL, int *FL) {
     } else {
         printf("Produto com o ID %d não encontrado.\n", id);
     }
-
 }
 
 //serve para simular um banco de dados para o Caixa poder realizar suas ações
@@ -219,7 +217,6 @@ void inicializarProdutosPreDefinidos(Produto produto[], int FL, int totalProduto
 
 void insertVenda(Historico vendas[], Produto produto[], int *IH, int *FH, int FL, char resposta[]) {
     int quantidadeVendida;
-
     char nomeProduto[50];
 
     printf("\nInforme o Nome do produto e a Quantidade vendida: ");
@@ -249,10 +246,9 @@ void insertVenda(Historico vendas[], Produto produto[], int *IH, int *FH, int FL
 
             (*FH)++;
 
-            //verifica se a resposta é diferente de 'n'/'N'
-            if (strcmp(resposta, "n") != 0 && strcmp(resposta, "N") != 0) {
+                //gera nota fiscal depois da venda
                 generateNotaFiscal(vendas, *IH, *FH);
-            }
+
             printf("\nVenda registrada com sucesso!\n");
         } else {
             printf("\nQuantidade insuficiente no estoque para realizar a venda.\n");
@@ -743,7 +739,6 @@ int main() {
                         //fica em um loop de vendas até que a resposta seja 'n'/'N'
                         insertVenda(vendas, produto, &IH, &FH, FL, resposta);
                         printf("Deseja continuar inserindo vendas?(Y/N)");
-                        fflush(stdin);
                         scanf("%s", resposta);
                     } while (strcmp(resposta, "n") != 0 && strcmp(resposta, "N") != 0);
                     break;
